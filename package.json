@@ -1,7 +1,7 @@
 {
   "name": "codeit-fs-layered-architecture-practice",
   "version": "1.0.0",
-  "description": "Layered Architecture 마이그레이션 1장 실습",
+  "description": "Layered Architecture 1장 실습",
   "type": "module",
   "imports": {
     "#controllers": "./src/controllers/index.js",
