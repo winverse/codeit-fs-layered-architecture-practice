@@ -1,0 +1,32 @@
+{
+  "name": "codeit-fs-layered-architecture-practice",
+  "version": "1.0.0",
+  "description": "Layered Architecture 마이그레이션 1장 실습",
+  "type": "module",
+  "imports": {
+    "#db": "./src/db/memory-db.js",
+    "#repositories": "./src/repositories/index.js",
+    "#providers": "./src/providers/index.js",
+    "#constants": "./src/common/constants/index.js",
+    "#exceptions": "./src/common/exceptions/index.js"
+  },
+  "scripts": {
+    "practice:1-05": "node src/practices/1-05-private-dependencies/main.js",
+    "practice:1-08": "node src/practices/1-08-mock-injection/main.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=24"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.5",
+    "eslint": "^10.12.0",
+    "prettier": "^3.9.10"
+  }
+}
