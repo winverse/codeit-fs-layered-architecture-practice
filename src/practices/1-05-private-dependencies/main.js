@@ -1,37 +1,28 @@
 // src/practices/1-05-private-dependencies/main.js
-import { db } from '#db';
-import { UserRepository } from '#repositories';
-import { PasswordProvider, TokenProvider } from '#providers';
-import { AuthService } from './auth-service.js';
+import { OrderService } from './order-service.js';
 
-const authService = new AuthService({
-  userRepository: new UserRepository({ db }),
-  passwordProvider: new PasswordProvider(),
-  tokenProvider: new TokenProvider(),
-});
+// TODO 6: #repositories의 MenuRepository와 ./sms-provider.js의 SmsProvider로 객체를 만들어
+// OrderService 생성자에 menuRepository, messageProvider라는 이름으로 넘깁니다.
+// SmsProvider에는 받는 번호 '010-1234-5678'을 { phone }으로 넘깁니다.
+const orderService = new OrderService({});
 
-async function tryLogin(label, password) {
+async function orderAmericano() {
   try {
-    const { user } = await authService.login({
-      email: 'kim@codeit.kr',
-      password,
-    });
-    console.log(`${label}: 로그인 성공 (${user.name})`);
+    await orderService.order({ menuId: 1, quantity: 2 });
   } catch (error) {
-    console.log(`${label}: 로그인 실패 (${error.message})`);
+    console.log(`주문 실패 (${error.message})`);
   }
 }
 
-console.log('바깥에서 보이는 속성:', Object.keys(authService));
+console.log('바깥에서 보이는 속성:', Object.keys(orderService));
+await orderAmericano();
 
-await tryLogin('맞는 비밀번호', 'codeit1234');
-await tryLogin('틀린 비밀번호', 'wrong-password');
-
-// 클래스 바깥의 코드가 passwordProvider를 어떤 비밀번호든 통과시키는 객체로 바꿉니다.
-authService.passwordProvider = {
-  async compare() {
-    return true;
+// 클래스 바깥의 코드가 menuRepository를 가격이 0원인 메뉴를 돌려주는 객체로 바꿉니다.
+orderService.menuRepository = {
+  async findById(id) {
+    return { id, name: '아메리카노', price: 0 };
   },
 };
 
-await tryLogin('바꾼 뒤 틀린 비밀번호', 'wrong-password');
+console.log('바깥에서 menuRepository를 바꾼 뒤');
+await orderAmericano();
