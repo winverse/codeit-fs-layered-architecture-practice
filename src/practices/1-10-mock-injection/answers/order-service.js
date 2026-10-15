@@ -1,4 +1,4 @@
-// src/practices/1-09-mock-injection/answers/order-service.js
+// src/practices/1-10-mock-injection/answers/order-service.js
 export class OrderService {
   #menuRepository;
   #messageProvider;

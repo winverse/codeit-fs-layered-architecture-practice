@@ -1,4 +1,4 @@
-# 1장 09 실습: 생성자 주입으로 Provider와 모의 객체 바꿔 넣기
+# 1장 10 실습: 생성자 주입으로 Provider와 모의 객체 바꿔 넣기
 
 ## 목표
 
@@ -9,15 +9,15 @@
 루트 `README.md`의 '설치와 첫 실행'을 마친 실습 저장소 폴더에서 실행합니다.
 
 ```bash
-pnpm practice:1-09
+pnpm practice:1-10
 ```
 
 ## 수정할 파일과 시작 상태
 
-다음 순서로 두 파일을 수정합니다.
+다음 순서로 두 파일을 수정합니다. 할 일은 `TODO 1`·`TODO 2` 주석에 적혀 있습니다.
 
-1. `src/practices/1-09-mock-injection/order-service.js`: 시작 상태의 `OrderService`는 필드를 선언하면서 `MenuRepository`와 `SmsProvider`를 직접 만듭니다. `order`는 고치지 않습니다.
-2. `src/practices/1-09-mock-injection/mocks.js`: 두 모의 객체 `mockMenuRepository`, `mockMessageProvider`가 아직 빈 객체입니다.
+1. `src/practices/1-10-mock-injection/order-service.js`: 시작 상태의 `OrderService`는 필드를 선언하면서 `MenuRepository`와 `SmsProvider`를 직접 만듭니다. `order`는 고치지 않습니다.
+2. `src/practices/1-10-mock-injection/mocks.js`: 두 모의 객체 `mockMenuRepository`, `mockMessageProvider`가 아직 빈 객체입니다.
 
 `main.js`는 같은 `OrderService` 클래스에 넘기는 객체만 바꿔 세 번 주문합니다. 첫째는 `SmsProvider`, 둘째는 이메일을 보내는 `EmailProvider`, 셋째는 두 모의 객체를 넘기고, 마지막 줄에 `mockMessageProvider.sentTexts`를 출력합니다. 시작 상태에서 실행하면 다음이 출력됩니다.
 
@@ -32,8 +32,8 @@ pnpm practice:1-09
 
 ## 구현 내용
 
-1. `order-service.js`: 05 실습의 `OrderService`처럼 생성자에서 `{ menuRepository, messageProvider }` 객체 하나를 전달받아 두 값을 `#menuRepository`, `#messageProvider`에 보관합니다. 더 이상 쓰지 않는 `import`는 지웁니다.
-2. `mocks.js`: `order`가 호출하는 메서드를 찾아 두 모의 객체에 넣습니다.
+1. `order-service.js`의 `TODO 1`: 05 실습의 `OrderService`처럼 생성자에서 `{ menuRepository, messageProvider }` 객체 하나를 전달받아 두 값을 `#menuRepository`, `#messageProvider`에 보관합니다. 더 이상 쓰지 않는 `import`는 지웁니다.
+2. `mocks.js`의 `TODO 2`: `order`가 호출하는 메서드를 찾아 두 모의 객체에 넣습니다.
 
 - `mockMenuRepository`: 메뉴를 찾을 때 받은 `id`와 이름 `'모의 메뉴'`, 가격 `1000`을 담은 메뉴 객체(`{ id, name, price }`)를 돌려줍니다. 받은 `id`가 무엇이든 이름과 가격은 같습니다.
 - `mockMessageProvider`: 메시지를 출력하지 않고, 받은 문자열을 `sentTexts` 배열에 차례로 담습니다.
@@ -41,7 +41,7 @@ pnpm practice:1-09
 ## 확인하기
 
 ```bash
-pnpm practice:1-09
+pnpm practice:1-10
 ```
 
 ## 성공 기준

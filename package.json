@@ -10,8 +10,8 @@
   },
   "scripts": {
     "practice:1-05": "node src/practices/1-05-private-dependencies/main.js",
-    "practice:1-06": "node src/practices/1-06-controller-inheritance/main.js",
-    "practice:1-09": "node src/practices/1-09-mock-injection/main.js",
+    "practice:1-07": "node src/practices/1-07-controller-inheritance/main.js",
+    "practice:1-10": "node src/practices/1-10-mock-injection/main.js",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint ."

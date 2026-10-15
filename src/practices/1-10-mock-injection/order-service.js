@@ -1,4 +1,4 @@
-// src/practices/1-09-mock-injection/order-service.js
+// src/practices/1-10-mock-injection/order-service.js
 import { MenuRepository } from '#repositories';
 import { SmsProvider } from './sms-provider.js';
 

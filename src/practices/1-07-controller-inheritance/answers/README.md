@@ -1,6 +1,6 @@
-# 1장 06 실습 정답과 해설
+# 1장 07 실습 정답과 해설
 
-`src/practices/1-06-controller-inheritance/auth-controller.js`의 `import`·클래스 선언·생성자를 바꾸고 `routes()`를 더합니다. `signUp`, `login`은 그대로 둡니다.
+`src/practices/1-07-controller-inheritance/auth-controller.js`의 `import`·클래스 선언·생성자를 바꾸고 `routes()`를 더합니다. `signUp`, `login`은 그대로 둡니다.
 
 ```javascript
 import { BaseController } from '#controllers';

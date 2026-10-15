@@ -1,6 +1,6 @@
 # 1장 05 실습 정답과 해설
 
-## 1. `sms-provider.js`
+## `TODO 1`·`TODO 2`: `sms-provider.js`
 
 ```javascript
 export class SmsProvider {
@@ -16,7 +16,7 @@ export class SmsProvider {
 }
 ```
 
-## 2. `order-service.js`
+## `TODO 3`~`TODO 5`: `order-service.js`
 
 ```javascript
 export class OrderService {
@@ -38,7 +38,7 @@ export class OrderService {
 }
 ```
 
-## 3. `main.js`
+## `TODO 6`: `main.js`
 
 맨 위에 두 `import`를 더하고, `new OrderService({})` 줄을 다음 코드로 바꿉니다.
 

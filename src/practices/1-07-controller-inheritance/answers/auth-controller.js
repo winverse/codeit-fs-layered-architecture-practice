@@ -1,4 +1,4 @@
-// src/practices/1-06-controller-inheritance/answers/auth-controller.js
+// src/practices/1-07-controller-inheritance/answers/auth-controller.js
 import { BaseController } from '#controllers';
 import { HTTP_STATUS } from '#constants';
 

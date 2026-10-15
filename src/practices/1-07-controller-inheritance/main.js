@@ -1,4 +1,4 @@
-// src/practices/1-06-controller-inheritance/main.js
+// src/practices/1-07-controller-inheritance/main.js
 import { BaseController } from '#controllers';
 import { AuthController } from './auth-controller.js';
 import { UserController } from './user-controller.js';

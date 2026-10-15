@@ -1,4 +1,4 @@
-// src/practices/1-06-controller-inheritance/auth-controller.js
+// src/practices/1-07-controller-inheritance/auth-controller.js
 import express from 'express';
 import { HTTP_STATUS } from '#constants';
 

@@ -21,7 +21,7 @@ pnpm practice:1-05
 
 ## 수정할 파일과 시작 상태
 
-다음 순서로 세 파일을 수정합니다. 할 일은 각 파일의 `TODO` 주석에 적혀 있습니다.
+다음 순서로 세 파일을 수정합니다. 할 일은 `TODO 1`~`TODO 6` 주석에 적혀 있습니다.
 
 1. `src/practices/1-05-private-dependencies/sms-provider.js`: `SmsProvider` 클래스의 본문이 비어 있습니다.
 2. `src/practices/1-05-private-dependencies/order-service.js`: `OrderService`는 생성자로 `menuRepository`와 `messageProvider`를 전달받지만 아직 보관하지 않고, `order`도 비어 있습니다.
@@ -40,10 +40,12 @@ orderService.menuRepository = {
 
 ## 구현 내용
 
-1. `sms-provider.js`: 받는 전화번호를 보관할 `#phone` 필드를 선언하고, 생성자에서 `{ phone }`으로 전달받은 값을 보관합니다. `send(text)`는 `[문자 → 전화번호] text` 형식의 한 줄을 출력합니다.
-2. `order-service.js`: `#menuRepository`, `#messageProvider` 필드를 선언하고, 생성자에서 전달받은 두 객체를 보관합니다.
-3. `order-service.js`: `order`에서 바깥에서 받아 필드에 보관한 두 객체를 호출합니다. `#menuRepository`의 `findById(menuId)`는 Promise를 돌려주므로 `await`로 메뉴를 받고, `#messageProvider`의 `send(text)`로 `아메리카노 2잔 주문 완료(9000원)`처럼 메뉴 이름, 수량, 금액(가격 × 수량)을 담은 문자열을 보냅니다.
-4. `main.js`: `MenuRepository`(`#repositories`)와 `SmsProvider`(`./sms-provider.js`) 객체를 만들어 `OrderService` 생성자에 `menuRepository`, `messageProvider`라는 이름으로 넘깁니다. `SmsProvider`에는 `{ phone: '010-1234-5678' }`을 넘깁니다.
+1. `sms-provider.js`의 `TODO 1`: 받는 전화번호를 보관할 `#phone` 필드를 선언하고, 생성자에서 `{ phone }`으로 전달받은 값을 보관합니다.
+2. `sms-provider.js`의 `TODO 2`: `send(text)` 메서드를 만들어 `[문자 → 전화번호] text` 형식의 한 줄을 출력합니다.
+3. `order-service.js`의 `TODO 3`: `#menuRepository`, `#messageProvider` 필드를 선언합니다.
+4. `order-service.js`의 `TODO 4`: 생성자에서 전달받은 두 객체를 두 필드에 보관합니다.
+5. `order-service.js`의 `TODO 5`: `order`에서 바깥에서 받아 필드에 보관한 두 객체를 호출합니다. `#menuRepository`의 `findById(menuId)`는 Promise를 돌려주므로 `await`로 메뉴를 받고, `#messageProvider`의 `send(text)`로 `아메리카노 2잔 주문 완료(9000원)`처럼 메뉴 이름, 수량, 금액(가격 × 수량)을 담은 문자열을 보냅니다.
+6. `main.js`의 `TODO 6`: `MenuRepository`(`#repositories`)와 `SmsProvider`(`./sms-provider.js`) 객체를 만들어 `OrderService` 생성자에 `menuRepository`, `messageProvider`라는 이름으로 넘깁니다. `SmsProvider`에는 `{ phone: '010-1234-5678' }`을 넘깁니다.
 
 ## 확인하기
 
@@ -51,11 +53,11 @@ orderService.menuRepository = {
 pnpm practice:1-05
 ```
 
-`sms-provider.js`와 `order-service.js`만 마친 상태에서 실행하면 `main.js`가 아직 객체를 넘기지 않으므로 `주문 실패 (Cannot read properties of undefined (reading 'findById'))`가 표시됩니다. `main.js`까지 마친 뒤 다시 실행합니다.
+`TODO 1`~`TODO 5`만 마친 상태에서 실행하면 `main.js`가 아직 객체를 넘기지 않으므로 `주문 실패 (Cannot read properties of undefined (reading 'findById'))`가 표시됩니다. `main.js`까지 마친 뒤 다시 실행합니다.
 
 ## 성공 기준
 
-다음과 같이 출력됩니다. 메시지 줄은 `findById`가 찾은 가격 4500에 수량 2를 곱한 금액을 `SmsProvider`의 `send`가 출력한 것이고, `menuRepository`를 바꾼 뒤에도 같습니다.
+다음과 같이 출력됩니다.
 
 ```text
 바깥에서 보이는 속성: []
@@ -63,6 +65,10 @@ pnpm practice:1-05
 바깥에서 menuRepository를 바꾼 뒤
 [문자 → 010-1234-5678] 아메리카노 2잔 주문 완료(9000원)
 ```
+
+첫 줄의 `[]`는 `Object.keys(orderService)`가 돌려준 빈 배열입니다. 두 객체를 보관했는데도 바깥에서 보이는 속성이 하나도 없는 것은 `#private` 필드가 `Object.keys`에 나타나지 않기 때문입니다. 둘째 줄은 `findById`가 찾은 가격 4500에 수량 2를 곱한 금액을 `SmsProvider`의 `send`가 출력한 것입니다.
+
+바깥 코드가 가격이 0원인 메뉴를 돌려주는 객체를 대입했는데도 마지막 줄은 둘째 줄과 같은 9000원입니다. 이 대입은 `orderService`에 `menuRepository`라는 일반 속성을 새로 만들 뿐 `#menuRepository`는 바꾸지 못하므로, `order`는 생성자에서 보관한 `MenuRepository`로 계속 금액을 계산합니다. 두 줄이 같으면 `#private` 필드가 바깥의 대입으로부터 의존성을 지킨 것입니다.
 
 ## 실패 기준
 

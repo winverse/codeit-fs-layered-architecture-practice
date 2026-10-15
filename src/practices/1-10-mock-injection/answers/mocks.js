@@ -1,4 +1,4 @@
-// src/practices/1-09-mock-injection/answers/mocks.js
+// src/practices/1-10-mock-injection/answers/mocks.js
 export const mockMenuRepository = {
   async findById(id) {
     return { id, name: '모의 메뉴', price: 1000 };
